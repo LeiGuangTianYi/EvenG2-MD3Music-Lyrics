@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>MD3 Lyrics</title>
+<style>
+  :root {
+    --bg: #0a0c0b;
+    --panel: #101512;
+    --line: #1c2a20;
+    --dim: #3d6f4c;
+    --bright: #8bffae;
+    --text: #b7c6bb;
+    --muted: #5d6f62;
+    --warn: #ffb86b;
+    --err: #ff7a7a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+  body {
+    font-family: -apple-system, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    padding: 14px 14px 24px;
+    min-height: 100vh;
+  }
+  header {
+    display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px;
+  }
+  header h1 { font-size: 17px; margin: 0; color: #e8f3ec; font-weight: 600; letter-spacing: .3px; }
+  header .sub { font-size: 11px; color: var(--muted); }
+
+  /* 眼镜预览：576×288 画布的三行布局，等比缩放到手机宽度 */
+  .glasses {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    background: #000;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 0 40px rgba(139, 255, 174, .05);
+  }
+  .glasses .row {
+    position: absolute; left: 4.2%; right: 4.2%;
+    display: flex; align-items: center;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    font-size: 13px; line-height: 1.15;
+  }
+  .glasses .row.prev { top: 18%; height: 15%; color: var(--dim); font-size: 12px; }
+  .glasses .row.cur { top: 41%; height: 20%; color: var(--bright); font-size: 16px; font-weight: 600; }
+  .glasses .row.next { top: 64%; height: 15%; color: var(--dim); font-size: 12px; }
+  .glasses .empty {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 13px; letter-spacing: .5px;
+  }
+  .glasses .badge {
+    position: absolute; right: 8px; top: 7px;
+    font-size: 10px; color: var(--muted); letter-spacing: .5px;
+  }
+
+  .status {
+    margin-top: 12px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--panel); padding: 10px 12px;
+  }
+  .status dl { margin: 0; display: grid; grid-template-columns: 74px 1fr; row-gap: 7px; }
+  .status dt { color: var(--muted); font-size: 12px; }
+  .status dd { margin: 0; font-size: 13px; color: var(--text); word-break: break-all; }
+  .ok { color: #6ee7a0; }
+  .bad { color: var(--err); }
+  .warn { color: var(--warn); }
+
+  h2 {
+    font-size: 12px; font-weight: 500; color: var(--muted);
+    margin: 16px 0 6px; letter-spacing: .6px; text-transform: uppercase;
+  }
+  pre.log {
+    margin: 0; padding: 10px 12px;
+    background: #060808; border: 1px solid var(--line); border-radius: 10px;
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 11px; line-height: 1.5; color: #7d9c86;
+    max-height: 40vh; overflow: auto; white-space: pre-wrap; word-break: break-all;
+  }
+  pre.log .t { color: #4e6355; }
+</style>
+</head>
+<body>
+<!-- 页面骨架先渲染，再启动桥接：即使 SDK 出问题，也能看到「卡在哪一步」。 -->
+<header>
+  <h1>MD3 Lyrics</h1>
+  <span class="sub">眼镜实时预览</span>
+</header>
+
+<div class="glasses" id="glasses">
+  <div class="badge" id="g-badge">G2 576×288</div>
+  <div class="row prev" id="g-prev"></div>
+  <div class="row cur" id="g-cur"></div>
+  <div class="row next" id="g-next"></div>
+  <div class="empty" id="g-empty">等待播放…</div>
+</div>
+
+<div class="status">
+  <dl>
+    <dt>桥接</dt><dd id="s-bridge">检测中…</dd>
+    <dt>歌曲</dt><dd id="s-song">—</dd>
+    <dt>播放</dt><dd id="s-play">—</dd>
+    <dt>进度</dt><dd id="s-line">—</dd>
+    <dt>眼镜页</dt><dd id="s-glasses">未创建</dd>
+  </dl>
+</div>
+
+<h2>运行日志</h2>
+<pre class="log" id="log"></pre>
+
+<script src="./plugin.js"></script>
+</body>
+</html>

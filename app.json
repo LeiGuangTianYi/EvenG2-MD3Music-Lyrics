@@ -1,0 +1,21 @@
+{
+  "package_id": "com.personal.g2lyricsbridge",
+  "edition": "202601",
+  "name": "MD3 Lyrics",
+  "version": "0.3.0",
+  "min_app_version": "2.4.0",
+  "min_sdk_version": "0.0.16",
+  "entrypoint": "index.html",
+  "permissions": [
+    {
+      "name": "network",
+      "desc": "Reads lyric state only from the MD3 Lyrics Bridge running inside MD3Music on this phone (loopback only).",
+      "whitelist": [
+        "http://127.0.0.1:21771",
+        "http://localhost:21771"
+      ]
+    }
+  ],
+  "supported_languages": ["zh", "en"]
+}
+

@@ -1,0 +1,21 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.personal.g2lyricsbridge"
+    android:versionCode="4"
+    android:versionName="0.3.0">
+
+    <!-- The bridge is a loopback ServerSocket, which still needs the Internet permission. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:label="G2 Lyrics Bridge"
+        android:theme="@style/AppTheme"
+        android:allowBackup="false"
+        android:usesCleartextTraffic="true">
+        <meta-data android:name="xposedmodule" android:value="true" />
+        <meta-data
+            android:name="xposeddescription"
+            android:value="Publishes MD3Music Lyricon lyrics on 127.0.0.1:21771 for the MD3 Lyrics Even G2 plugin." />
+        <meta-data android:name="xposedminversion" android:value="93" />
+        <meta-data android:name="xposedscope" android:resource="@array/xposedscope" />
+    </application>
+</manifest>

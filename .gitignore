@@ -1,0 +1,18 @@
+# 构建产物
+dist/
+build/
+outputs/
+
+# 依赖
+node_modules/
+
+# 本地工具链与逆向分析素材（体积大、含个人设备数据，绝不入库）
+work/
+
+# 编辑器 / 系统垃圾
+.vscode/
+.idea/
+*.log
+*.tmp
+Thumbs.db
+desktop.ini

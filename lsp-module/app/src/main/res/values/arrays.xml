@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Packages the LSPosed manager should tick by default for this module.
+         MD3Music 6.3.0 ships two applicationIds: 精简版 com.md3music.md3music,
+         随身听兼容版 com.apple.android.music. Only the installed one needs ticking. -->
+    <string-array name="xposedscope">
+        <item>com.md3music.md3music</item>
+        <item>com.apple.android.music</item>
+    </string-array>
+</resources>
