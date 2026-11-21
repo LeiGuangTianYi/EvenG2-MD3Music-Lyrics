@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.personal.g2lyricsbridge"
-    android:versionCode="4"
-    android:versionName="0.3.0">
+    android:versionCode="8"
+    android:versionName="0.3.4">
 
     <!-- The bridge is a loopback ServerSocket, which still needs the Internet permission. -->
     <uses-permission android:name="android.permission.INTERNET" />

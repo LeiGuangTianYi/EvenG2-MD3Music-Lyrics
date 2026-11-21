@@ -4,8 +4,8 @@
 
 | 文件 | 说明 | 校验 |
 | --- | --- | --- |
-| `g2-lyrics-bridge-0.3.0.apk` | LSPosed 模块，装到手机 | 20,947 字节，调试签名（CN=G2 Lyrics Bridge） |
-| `g2-md3-lyrics-0.3.0.ehpk` | Even Hub 插件，装到眼镜 | 75,218 字节，`evenhub pack --sdk-ver 0.0.16` 产出 |
+| `g2-lyrics-bridge-0.3.4.apk` | LSPosed 模块，装到手机 | 25,043 字节，调试签名（CN=G2 Lyrics Bridge），SHA-256 `25A0AB49CB6D0C1A3258659AAB705DD39641A0BEEA2AD7A6C3454C134BB97C37` |
+| `g2-md3-lyrics-0.3.4.ehpk` | Even Hub 插件，装到眼镜 | 75,219 字节，`evenhub pack --sdk-ver 0.0.16` 产出，SHA-256 `279DD4A0C5CFE3C05012E3A501ACC356C69528570106891E038E2A830E7A1500` |
 
 安装步骤见 [../INSTALL.md](../INSTALL.md)。
 

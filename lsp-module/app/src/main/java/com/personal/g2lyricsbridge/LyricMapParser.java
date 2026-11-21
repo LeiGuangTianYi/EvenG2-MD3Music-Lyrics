@@ -52,29 +52,7 @@ final class LyricMapParser {
     }
 
     static SongSnapshot parse(Map<?, ?> songMap) {
-        List<Line> lines = new ArrayList<>();
-        if (songMap != null) {
-            Object rawLyrics = songMap.get("lyrics");
-            if (rawLyrics instanceof Iterable<?>) {
-                for (Object element : (Iterable<?>) rawLyrics) {
-                    if (!(element instanceof Map<?, ?>)) continue;
-                    Map<?, ?> line = (Map<?, ?>) element;
-                    String text = stringOf(line.get("text")).trim();
-                    // Blank lines are LRC padding / instrumental markers; the glasses only show原文歌词.
-                    if (text.isEmpty()) continue;
-                    long begin = longOf(line.get("begin"));
-                    long end = longOf(line.get("end"));
-                    if (begin < 0) begin = 0;
-                    if (end <= begin) end = begin + 1;
-                    lines.add(new Line(begin, end, text));
-                }
-            }
-        }
-        Collections.sort(lines, new Comparator<Line>() {
-            @Override public int compare(Line left, Line right) {
-                return Long.compare(left.begin, right.begin);
-            }
-        });
+        List<Line> lines = extractLines(songMap == null ? null : songMap.get("lyrics"));
 
         String title = "";
         String artist = "";
@@ -90,6 +68,40 @@ final class LyricMapParser {
         if (startPosition < 0) startPosition = 0;
         if (duration > 0 && startPosition > duration) startPosition = duration;
         return new SongSnapshot(lines, title, artist, duration, startPosition);
+    }
+
+    /** Extracts and sorts lyric lines from the Dart {@code lyrics} array. */
+    static List<Line> extractLines(Object rawLyrics) {
+        List<Line> lines = new ArrayList<>();
+        if (rawLyrics instanceof Iterable<?>) {
+            for (Object element : (Iterable<?>) rawLyrics) {
+                if (element instanceof Map<?, ?>) {
+                    Line line = lineFromMap((Map<?, ?>) element);
+                    if (line != null) lines.add(line);
+                }
+            }
+        }
+        sortLines(lines);
+        return lines;
+    }
+
+    /** Builds one line from a Dart line map; returns null for blank/instrumental padding. */
+    static Line lineFromMap(Map<?, ?> line) {
+        String text = stringOf(line.get("text")).trim();
+        if (text.isEmpty()) return null;
+        long begin = longOf(line.get("begin"));
+        long end = longOf(line.get("end"));
+        if (begin < 0) begin = 0;
+        if (end <= begin) end = begin + 1;
+        return new Line(begin, end, text);
+    }
+
+    static void sortLines(List<Line> lines) {
+        Collections.sort(lines, new Comparator<Line>() {
+            @Override public int compare(Line left, Line right) {
+                return Long.compare(left.begin, right.begin);
+            }
+        });
     }
 
     private static String stringOf(Object value) {

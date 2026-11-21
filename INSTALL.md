@@ -6,8 +6,8 @@
 
 | 文件 | 是什么 | 装在哪 | 版本 |
 | --- | --- | --- | --- |
-| `g2-lyrics-bridge.apk` | LSPosed 模块 | 手机，LSPosed 里启用 | 0.2.1（versionCode 3） |
-| `g2-md3-lyrics.ehpk` | Even Hub 插件 | Even Realities App / 眼镜 | 0.3.0 |
+| `g2-lyrics-bridge.apk` | LSPosed 模块 | 手机，LSPosed 里启用 | 0.3.4（versionCode 8） |
+| `g2-md3-lyrics.ehpk` | Even Hub 插件 | Even Realities App / 眼镜 | 0.3.4 |
 
 两个文件都不联网、不上传数据。
 
@@ -19,7 +19,7 @@
 | --- | --- |
 | 手机已 root | 装 `su -c id` 能用；本项目在小米 17 Ultra / Android 17 / SukiSU Ultra 4.2.1 上验证 |
 | LSPosed 已激活 | LSPosed 首页显示「已激活」，能进「模块」页 |
-| MD3Music 版本 | 设置 → 关于 → 版本号为 **6.3.0**；包名精简版 `com.md3music.md3music` |
+| MD3Music 版本 | 精简版 **6.3.0**（`com.md3music.md3music`）或随身听兼容版 **6.4.1**（`com.apple.android.music`） |
 | Even App 版本 | Even Realities App **2.4.0** 或更高 |
 | 眼镜固件 | Even App → 设备 → 固件 **2.4.1.4** |
 
@@ -95,7 +95,7 @@ http://127.0.0.1:21771/v1/health
 ### 方式 A：Even Hub 网页端上传（推荐，一次装好长期可用）
 
 1. 电脑浏览器打开 Even Hub 开发者中心，登录后进入「我的项目」→「上传包」。
-2. 选 `g2-md3-lyrics.ehpk`，等它校验通过（页面会显示版本号 0.3.0）。
+2. 选 `g2-md3-lyrics.ehpk`，等它校验通过（页面会显示版本号 0.3.4）。
 3. 手机 Even App 里进入「**我的插件**」，找到 **MD3 Lyrics**，点安装/添加到眼镜。
 4. 在眼镜上打开该插件（或直接在手机上打开）。
 

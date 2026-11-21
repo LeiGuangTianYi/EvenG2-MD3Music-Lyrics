@@ -1,7 +1,7 @@
 {
   "name": "g2-md3-lyrics",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.3.4",
   "type": "module",
   "description": "Even G2 plugin that mirrors MD3Music lyrics from the phone loopback bridge",
   "scripts": {
